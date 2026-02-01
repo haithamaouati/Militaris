@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Militaris</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<canvas id="radar-bg"></canvas>
+
+<header>
+  <h1>Militaris</h1>
+</header>
+
+<main>
+  <div class="card controls">
+    <select id="countrySelect">
+      <option value="">Select a country</option>
+    </select>
+    <select id="countrySelect2">
+      <option value="">Select a second country (for comparison)</option>
+    </select>
+    <button id="zoomOut">Zoom Out</button>
+    <button id="reset">Reset</button>
+    <button id="copyLink">Copy Link</button>
+    <input type="text" id="shareLink" readonly placeholder="Shareable link will appear here">
+  </div>
+
+  <div class="card map-card">
+    <div id="map-container"></div>
+    <canvas id="explosion-canvas"></canvas>
+  </div>
+
+  <div class="card table-card" id="detailsCard" hidden>
+    <h3>Selected Country</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Flag</th>
+          <th>Country</th>
+        </tr>
+      </thead>
+      <tbody id="detailsBody"></tbody>
+    </table>
+  </div>
+
+  <div class="card table-card" id="compareCard" hidden>
+    <h3>Comparison</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Country</th>
+          <th>Rank</th>
+          <th>Flag</th>
+        </tr>
+      </thead>
+      <tbody id="compareBody"></tbody>
+    </table>
+  </div>
+
+  <div class="card table-card">
+    <h3 style="cursor:pointer" id="toggleAll">All Countries Ranking ▼</h3>
+    <div id="allCountriesWrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Flag</th>
+            <th>Country</th>
+          </tr>
+        </thead>
+        <tbody id="allCountriesBody"></tbody>
+      </table>
+    </div>
+  </div>
+</main>
+
+<footer>
+  Developed by <a href="https://github.com/haithamaouati" target="_blank">Haitham Aouati</a>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
