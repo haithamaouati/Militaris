@@ -1,87 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Militaris</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <title>MILITARIS</title>
+    <meta name="description" content="Tactical interface for analyzing global military power and national rankings.">
+    <meta name="author" content="Haitham Aouati">
+    
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
 </head>
 <body>
+    <div id="grid-layer"></div>
+    <div class="corner-brace top-left"></div>
+    <div class="corner-brace top-right"></div>
 
-<canvas id="radar-bg"></canvas>
-
-<header>
-  <h1>Militaris</h1>
-</header>
-
-<main>
-  <div class="card controls">
-    <select id="countrySelect">
-      <option value="">Select a country</option>
-    </select>
-    <select id="countrySelect2">
-      <option value="">Select a second country (for comparison)</option>
-    </select>
-    <button id="zoomOut">Zoom Out</button>
-    <button id="reset">Reset</button>
-    <button id="copyLink">Copy Link</button>
-    <input type="text" id="shareLink" readonly placeholder="Shareable link will appear here">
-  </div>
-
-  <div class="card map-card">
-    <div id="map-container"></div>
-    <canvas id="explosion-canvas"></canvas>
-  </div>
-
-  <div class="card table-card" id="detailsCard" hidden>
-    <h3>Selected Country</h3>
-    <table>
-      <thead>
-        <tr>
-          <th>Rank</th>
-          <th>Flag</th>
-          <th>Country</th>
-        </tr>
-      </thead>
-      <tbody id="detailsBody"></tbody>
-    </table>
-  </div>
-
-  <div class="card table-card" id="compareCard" hidden>
-    <h3>Comparison</h3>
-    <table>
-      <thead>
-        <tr>
-          <th>Country</th>
-          <th>Rank</th>
-          <th>Flag</th>
-        </tr>
-      </thead>
-      <tbody id="compareBody"></tbody>
-    </table>
-  </div>
-
-  <div class="card table-card">
-    <h3 style="cursor:pointer" id="toggleAll">All Countries Ranking ▼</h3>
-    <div id="allCountriesWrapper">
-      <table>
-        <thead>
-          <tr>
-            <th>Rank</th>
-            <th>Flag</th>
-            <th>Country</th>
-          </tr>
-        </thead>
-        <tbody id="allCountriesBody"></tbody>
-      </table>
+    <div id="top-intel-bar">
+        <a href="https://forceindex.militarywatchmagazine.com/national_ranking" target="_blank" class="intel-tag">DATA SOURCE</a>
+        <div class="ticker-box">
+            <div id="news-ticker" class="ticker-scroll">NATIONAL RANKINGS BY MILITARY STRENGTH — Military Watch Magazine</div>
+        </div>
     </div>
-  </div>
-</main>
 
-<footer>
-  Developed by <a href="https://github.com/haithamaouati" target="_blank">Haitham Aouati</a>
-</footer>
+    <header id="main-header">
+        <div class="brand">
+            <h1>MILITARIS</h1>
+            <div id="dev-tag">Developed by <a href="https://github.com/haithamaouati" target="_blank">Haitham Aouati</a></div>
+            <div id="status-line"><span class="pulse"></span> <span id="clock-display"></span></div>
+        </div>
+        <div class="nav-cluster">
+            <button onpointerdown="zoomInMap()" title="Zoom In">+</button>
+            <button onpointerdown="zoomOutMap()" title="Zoom Out">−</button>
+            <button onpointerdown="resetMap()" title="Reset View">⟲</button>
+        </div>
+    </header>
 
-<script src="script.js"></script>
+    <div id="map-wrapper"></div>
+
+    <section id="conflict-board">
+        <div class="board-header">
+            <div class="header-left">
+                <span class="board-title">STRENGTH RANKINGS</span>
+                <div id="level-stats"></div>
+            </div>
+            <div class="header-right">
+                <button id="board-toggle" onclick="toggleBoard()">_</button>
+            </div>
+        </div>
+        <div id="conflict-stream"></div>
+    </section>
+
+    <div id="info-portal" class="hidden">
+        <button id="portal-close" onclick="kill()">×</button>
+        <div class="portal-inner">
+            <div id="p-emoji"></div>
+            <h2 id="p-name"></h2>
+            <div id="p-code"></div>
+            <div id="p-risk-tag"></div>
+            <div id="p-subject"></div>
+            <div id="portal-actions">
+                <button id="share-intel-btn" class="action-btn" onclick="shareIntel()">SHARE RANKING</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
 </body>
 </html>
